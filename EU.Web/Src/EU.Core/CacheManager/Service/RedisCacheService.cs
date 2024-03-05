@@ -23,6 +23,7 @@ namespace EU.Core.CacheManager
         private readonly string _instance;
         private readonly int _num = 0;
         private readonly string _connectionString = AppSetting.RedisConnectionString;
+        private readonly string _redisKeyPrefix = AppSetting.RedisKeyPrefix;
         public static IMemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
 
         /// <summary>
@@ -97,22 +98,26 @@ namespace EU.Core.CacheManager
             {
                 throw new ArgumentNullException(nameof(key));
             }
+            key = _redisKeyPrefix + key;
             return _cache.KeyExists(key);
         }
 
         public void ListLeftPush(string key, string val)
         {
+            key = _redisKeyPrefix + key;
             _cache.ListLeftPush(key, val);
         }
 
         public void ListRightPush(string key, string val)
         {
+            key = _redisKeyPrefix + key;
             _cache.ListRightPush(key, val);
         }
 
 
         public T ListDequeue<T>(string key) where T : class
         {
+            key = _redisKeyPrefix + key;
             RedisValue redisValue = _cache.ListRightPop(key);
             if (!redisValue.HasValue)
                 return null;
@@ -120,6 +125,7 @@ namespace EU.Core.CacheManager
         }
         public object ListDequeue(string key)
         {
+            key = _redisKeyPrefix + key;
             RedisValue redisValue = _cache.ListRightPop(key);
             if (!redisValue.HasValue)
                 return null;
@@ -134,6 +140,7 @@ namespace EU.Core.CacheManager
         /// <param name="keepIndex"></param>
         public void ListRemove(string key, int keepIndex)
         {
+            key = _redisKeyPrefix + key;
             _cache.ListTrim(key, keepIndex, -1);
         }
 
@@ -148,6 +155,7 @@ namespace EU.Core.CacheManager
             {
                 throw new ArgumentNullException(nameof(key));
             }
+            key = _redisKeyPrefix + key;
             return _cache.KeyDelete(key);
         }
         /// <summary>
@@ -162,7 +170,7 @@ namespace EU.Core.CacheManager
                 throw new ArgumentNullException(nameof(keys));
             }
 
-            keys.ToList().ForEach(item => Remove(item));
+            keys.ToList().ForEach(item => Remove(_redisKeyPrefix + item));
         }
         /// <summary>
         /// 获取缓存
@@ -173,6 +181,7 @@ namespace EU.Core.CacheManager
         {
             if (Ping())
             {
+                key = _redisKeyPrefix + key;
                 var value = _cache.StringGet(key);
 
                 if (!value.HasValue)
@@ -198,7 +207,7 @@ namespace EU.Core.CacheManager
         public string Get(string key)
         {
             if (Ping())
-                return _cache.StringGet(key).ToString();
+                return _cache.StringGet(_redisKeyPrefix + key).ToString();
             else return new MemoryCacheService(memoryCache).Get(key);
         }
         /// <summary>
@@ -209,7 +218,7 @@ namespace EU.Core.CacheManager
         public IDictionary<string, object> GetAll(IEnumerable<string> keys)
         {
             var dict = new Dictionary<string, object>();
-            keys.ToList().ForEach(item => dict.Add(item, Get(item)));
+            keys.ToList().ForEach(item => dict.Add(item, Get(_redisKeyPrefix + item)));
             return dict;
         }
 
@@ -293,7 +302,7 @@ namespace EU.Core.CacheManager
         public bool AddObject(string key, object value, TimeSpan? expiresIn = null, bool isSliding = false)
         {
             if (Ping())
-                return _cache.StringSet(key, JsonConvert.SerializeObject(value), expiresIn);
+                return _cache.StringSet(_redisKeyPrefix + key, JsonConvert.SerializeObject(value), expiresIn);
             else
                 return new MemoryCacheService(memoryCache).Add(key, JsonConvert.SerializeObject(value));
         }
@@ -309,7 +318,7 @@ namespace EU.Core.CacheManager
         public bool Add(string key, string value, TimeSpan? expiresIn = null, bool isSliding = false)
         {
             if (Ping())
-                return _cache.StringSet(key, value, expiresIn);
+                return _cache.StringSet(_redisKeyPrefix + key, value, expiresIn);
             else
                 return new MemoryCacheService(memoryCache).Add(key, value);
         }
@@ -348,7 +357,7 @@ namespace EU.Core.CacheManager
         public async Task<bool> AddAsync(string key, string hashField, string value)
         {
             if (await PingAsync())
-                return await _cache.HashSetAsync(key, hashField, value);
+                return await _cache.HashSetAsync(_redisKeyPrefix + key, hashField, value);
             else
                 return new MemoryCacheService(memoryCache).Add(key + "-" + hashField, value);
         }
@@ -366,6 +375,7 @@ namespace EU.Core.CacheManager
 
             if (Ping())
             {
+                key = _redisKeyPrefix + key;
                 var value = _cache.HashGet(key, hashField);
 
                 if (!value.HasValue)
@@ -388,6 +398,7 @@ namespace EU.Core.CacheManager
 
             if (Ping())
             {
+                key = _redisKeyPrefix + key;
                 var value = await _cache.HashGetAsync(key, hashField);
 
                 if (!value.HasValue)

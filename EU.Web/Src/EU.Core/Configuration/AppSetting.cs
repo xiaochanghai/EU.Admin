@@ -9,6 +9,12 @@ using EU.Core.Utilities;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using EU.Core.Enums;
+using NPOI.SS.Formula.Functions;
+using System.Data.SqlClient;
+using Util.Helpers;
+using EU.Core.LogHelper;
+using System.Data;
 
 namespace EU.Core.Configuration
 {
@@ -28,6 +34,11 @@ namespace EU.Core.Configuration
         public static string RedisConnectionString
         {
             get { return _connection.RedisConnectionString; }
+        }
+
+        public static string RedisKeyPrefix
+        {
+            get { return _connection.RedisKeyPrefix; }
         }
 
         public static bool UseRedis
@@ -104,6 +115,49 @@ namespace EU.Core.Configuration
                 _connection.DbConnectionString = _connection.DbConnectionString.DecryptDES(Secret.DB);
             }
             catch { }
+
+            #region 检查服务是否可用 
+
+            //bool mysql = Const.DBType.Name == DbCurrentType.MySql.ToString();
+            //if (mysql)
+            //{
+
+            //}
+            bool mssql = Const.DBType.Name == DbCurrentType.MsSql.ToString();
+
+            if (mssql)
+            {
+                using var conn = new SqlConnection(_connection.DbConnectionString);
+                while (true)
+                {
+
+                    if (Utility.IsPortOpen(conn.DataSource, 1433))
+                    {
+                        Logger.WriteLog("[数据库] 服务状态正常");
+                        break;
+                    }
+                    else
+                    {
+                        Logger.WriteLog("[数据库] 服务状态异常, 稍后重试");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+
+                    //conn.Open();
+                    //if (conn.State == ConnectionState.Open)
+                    //{
+                    //    conn.Close();
+                    //    Logger.WriteLog("[数据库] 服务状态正常");
+                    //    break;
+                    //}
+                    //else
+                    //{
+                    //    Logger.WriteLog("[数据库] 服务状态异常, 等待 5 秒后重试");
+                    //    System.Threading.Thread.Sleep(5000);
+                    //}
+                }
+            }
+            #endregion
+
 
             if (!string.IsNullOrEmpty(_connection.RedisConnectionString))
             {
@@ -195,6 +249,11 @@ namespace EU.Core.Configuration
         /// 数据库链接字符串
         /// </summary>
         public string DbConnectionString { get; set; }
+
+        /// <summary>
+        /// Redis键值前缀
+        /// </summary>
+        public string RedisKeyPrefix { get; set; }
 
         /// <summary>
         /// Redis链接地址

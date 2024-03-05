@@ -4,9 +4,10 @@ using System.Text;
 
 namespace EU.Core.Enums
 {
-  public enum DbCurrentType
+    public enum DbCurrentType
     {
-         MySql=1,
-         SqlServer=2
+        MySql = 1,
+        MsSql = 2,
+        PostgreSql = 3
     }
 }

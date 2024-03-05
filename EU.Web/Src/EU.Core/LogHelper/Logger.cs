@@ -23,8 +23,10 @@ namespace EU.Core.LogHelper
         public static readonly object _logger = new object();
         public static Queue<Sys_Log> loggerQueueData = new Queue<Sys_Log>();
         private static DateTime lastClearFileDT = DateTime.Now.AddDays(-1);
-        private static string _loggerPath = AppSetting.LogPath + "Logger\\Queue\\";
-        private static string _logPath = AppSetting.LogPath + "Logger\\";
+        //private static string _loggerPath = AppSetting.LogPath + "Logger\\Queue\\";
+        //private static string _logPath = AppSetting.LogPath + "Logger\\";
+        private static string _loggerPath = AppSetting.LogPath + "Queue\\";
+        private static string _logPath = AppSetting.LogPath;
 
         static Logger()
         {
