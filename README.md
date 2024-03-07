@@ -26,7 +26,7 @@
 
 前后端分离，使用 JWT 认证。
 
-后端：基于 .NET6 和 EF Core，集成常用组件。
+后端：基于 .NET6 、SqlSugar、 EF Core、Dapper，集成常用组件。
 
 前端：基于Ant Design Pro，主技术栈：React、Ant Design
 
