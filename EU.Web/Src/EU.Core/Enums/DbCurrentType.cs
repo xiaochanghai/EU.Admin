@@ -8,6 +8,6 @@ namespace EU.Core.Enums
     {
         MySql = 1,
         MsSql = 2,
-        PostgreSql = 3
+        PgSql = 3
     }
 }

@@ -89,5 +89,9 @@ namespace EU.Core.Const
         /// 任务处理中心 -- PenSign回传 
         /// </summary>
         public const string CLIENT_ID_PENSIGN_CALLBACK = "PENSIGN-CALLBACK";
+        /// <summary>
+        /// 任务处理中心 -- TASK -- JOB
+        /// </summary>
+        public const string CLIENT_ID_TASK_MONITOR = "TASK-MONITOR";
     }
 }

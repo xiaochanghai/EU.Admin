@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
-using JianLian.HDIS.HttpApi.Hosting.Extensions;
 using EU.Core.DBManager;
 
 var app = CreateHostBuilder(args).Build();
