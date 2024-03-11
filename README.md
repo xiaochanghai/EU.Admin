@@ -55,6 +55,34 @@ http://116.204.98.209:8015/
 
 管理员： Admin  密码：1
 
+## 效果截图
+<table>
+    <tr>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/1.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/2.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/3.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/4.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/5.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/6.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/7.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/8.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/9.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/10.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/11.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/12.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/13.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/14.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/15.png"/></td>
+        <td><img src="https://gitee.com/xiaochanghai520/EU.Admin/blob/master/doc/images/16.png"/></td>
+    </tr>
+</table>
+
 ## 快速开始
 
 请参考[使用手册](./doc/使用手册.md)
