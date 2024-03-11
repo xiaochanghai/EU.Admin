@@ -349,7 +349,7 @@ namespace EU.Core.CacheManager
         public bool Add(string key, string hashField, string value)
         {
             if (Ping())
-                return _cache.HashSet(key, hashField, value);
+                return _cache.HashSet(_redisKeyPrefix + key, hashField, value);
             else
                 return new MemoryCacheService(memoryCache).Add(key + "-" + hashField, value);
         }
