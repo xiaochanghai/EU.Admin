@@ -15,29 +15,34 @@ namespace EU.Core.Module
 {
     public class ModuleSqlColumn
     {
+        /// <summary>
+        /// 模块代码
+        /// </summary>
         private string moduleCode;
+        private static RedisCacheService Redis = new RedisCacheService(2);
         public ModuleSqlColumn(string moduleCode)
         {
             this.moduleCode = moduleCode;
         }
         public List<SmModuleColumn> GetModuleSqlColumn()
         {
-            List<SmModule> moduleList = ModuleInfo.GetModuleList();
-            List<SmModuleColumn> cache = new RedisCacheService(2).Get<List<SmModuleColumn>>(CacheKeys.SmModuleColumn.ToString(), moduleCode);
+            var code = CacheKeys.SmModuleColumn.ToString();
+            List<SmModuleColumn> cache = Redis.Get<List<SmModuleColumn>>(code, moduleCode);
             if (cache == null)
             {
+                List<SmModule> moduleList = ModuleInfo.GetModuleList();
                 string sql = @"SELECT A.*, B.ModuleCode
                                 FROM SmModuleColumn A
                                      JOIN SmModules B ON A.SmModuleId = B.ID AND A.IsDeleted = B.IsDeleted
                                 WHERE A.IsDeleted = 'false'
                                 ORDER BY A.TAXISNO ASC";
                 cache = DBHelper.Instance.QueryList<SmModuleColumn>(sql);
-                new RedisCacheService(2).Remove(CacheKeys.SmModuleColumn.ToString());
+                Redis.Remove(code);
                 foreach (SmModule item in moduleList)
                 {
-                    List<SmModuleColumn> ColumnList = cache.Where(x => x.ModuleCode == item.ModuleCode).ToList();
-                    if (ColumnList.Count > 0)
-                        new RedisCacheService(2).AddObject(CacheKeys.SmModuleColumn.ToString(), item.ModuleCode, ColumnList);
+                    List<SmModuleColumn> columns = cache.Where(x => x.ModuleCode == item.ModuleCode).ToList();
+                    if (columns.Any())
+                        Redis.AddObject(code, item.ModuleCode, columns);
                 }
                 cache = cache.Where(x => x.ModuleCode == moduleCode).ToList();
             }
@@ -66,26 +71,17 @@ namespace EU.Core.Module
                     name = Convert.ToString(moduleSqlColumn[i].title);
                     id = Convert.ToString(moduleSqlColumn[i].dataIndex);
                     if (i < moduleSqlColumn.Count - 1)
-                    {
                         if (string.IsNullOrEmpty(name))
-                        {
                             columns += id + ",";
-                        }
                         else
-                        {
                             columns += id + " '" + name + "',";
-                        }
-                    }
                     else
                     {
                         if (string.IsNullOrEmpty(name))
-                        {
                             columns += id;
-                        }
+
                         else
-                        {
                             columns += id + " '" + name + "'";
-                        }
                     }
                 }
             }

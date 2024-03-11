@@ -40,14 +40,13 @@ namespace EU.Core.Module
         }
         public List<SmModuleSqlExtend> GetModuleSqlList()
         {
-            List<SmModuleSqlExtend> cache = new List<SmModuleSqlExtend>();
             string sql = @"SELECT A.*, B.ModuleCode
                                 FROM SmModuleSql A
                                      JOIN SmModules B
                                         ON A.ModuleId = B.ID
                                            AND A.IsDeleted = B.IsDeleted
                                 WHERE A.IsDeleted = 'false'";
-            cache = DBHelper.Instance.QueryList<SmModuleSqlExtend>(sql);
+            List<SmModuleSqlExtend> cache = DBHelper.Instance.QueryList<SmModuleSqlExtend>(sql);
             return cache;
         }
         #endregion

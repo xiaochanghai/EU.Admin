@@ -22,7 +22,6 @@ namespace EU.Core.Module
         /// <returns></returns>
         public static SmModule GetModuleInfo(string moduleCode)
         {
-
             SmModule module = Redis.Get<SmModule>("SM_MODULE", moduleCode);
             if (module == null)
             {
@@ -50,12 +49,13 @@ namespace EU.Core.Module
         /// <returns></returns>
         public static List<SmModule> GetModuleList()
         {
-            List<SmModule> moduleList = Redis.Get<List<SmModule>>(CacheKeys.SmModule.ToString());
+            var code = CacheKeys.SmModule.ToString();
+            List<SmModule> moduleList = Redis.Get<List<SmModule>>(code);
             if (moduleList == null)
             {
                 string sql = "SELECT A.* FROM SmModules A WHERE A.IsDeleted='false' ORDER BY A.ModuleCode ASC";
                 moduleList = DBHelper.Instance.QueryList<SmModule>(sql);
-                Redis.AddObject(CacheKeys.SmModule.ToString(), moduleList);
+                Redis.AddObject(code, moduleList);
             }
             return moduleList;
         }
