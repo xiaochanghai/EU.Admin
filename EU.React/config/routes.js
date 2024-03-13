@@ -466,6 +466,11 @@ export default
             component: "./system/monitor/job"
           },
           {
+            path: "/system/monitor/server",
+            name: "服务器信息",
+            component: "./system/monitor/server"
+          },
+          {
             path: "/system/setup/setparam",
             name: "参数管理",
             component: "./system/setup/setparam"
