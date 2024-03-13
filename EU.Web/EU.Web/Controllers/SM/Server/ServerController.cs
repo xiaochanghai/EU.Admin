@@ -49,7 +49,7 @@ public class ServerController : BaseController1<Model.SmApiLog>
             LocalIp = HttpContextExtension.GetUserIp(Core.Utilities.HttpContext.Current), // 本地地址
             RuntimeInformation.FrameworkDescription, // NET框架
             Environment = _hostingEnvironment.IsDevelopment() ? "Development" : "Production",
-            wwroot = _hostingEnvironment.WebRootPath, // 网站根目录
+            Wwwroot = _hostingEnvironment.WebRootPath, // 网站根目录
             Stage = _hostingEnvironment.IsStaging() ? "Stage环境" : "非Stage环境", // 是否Stage环境
         };
 
