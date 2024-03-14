@@ -42,7 +42,7 @@
     <PackageReference Include="Senparc.Weixin.MP" Version="16.18.9" />
     <PackageReference Include="Senparc.Weixin.Work" Version="3.15.12" />
     <PackageReference Include="SqlSugarCore" Version="5.1.4.83" />
-    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
