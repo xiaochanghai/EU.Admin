@@ -8,7 +8,6 @@ import defaultSettings from '../../../config/defaultSettings';
 import Utility from '@/utils/utility';
 import UploadExcel from '../../pages/import/UploadExcel';
 import { ProTable } from '@ant-design/pro-components';
-import { } from '@ant-design/icons';
 
 const { confirm } = Modal;
 let tableAction;
@@ -39,9 +38,7 @@ class SmProTable extends React.Component {
             action.reload();
             message.success(response.message);
           }
-          else {
-            message.error(response.message);
-          }
+          else message.error(response.message);
         });
       },
       onCancel() {
@@ -56,9 +53,7 @@ class SmProTable extends React.Component {
       message.success(response.message);
       action.reload();
     }
-    else {
-      message.error(response.message);
-    }
+    else message.error(response.message);
   }
   async showLogRecord(selectedRows) {
     const { moduleInfo, moduleInfo: { moduleCode } } = this.props;
@@ -66,9 +61,7 @@ class SmProTable extends React.Component {
     let response = await GetModuleLogInfo({ moduleCode, id: selectedRows[0].ID });
     if (response.Success) {
       this.setState({ recordLogData: response.Data, recordLogVisible: true })
-    } else {
-      message.error(response.message);
-    }
+    } else message.error(response.message);
   }
   async moreToolBarMenuClick(e, action) {
     let me = this;
@@ -89,9 +82,7 @@ class SmProTable extends React.Component {
           a.setAttribute('download', '')
           a.setAttribute('href', '/api/File/Download?id=' + response.data.fileId);
           a.click();
-        } else {
-          message.error(response.message);
-        }
+        } else message.error(response.message);
         break;
       default:
         break;
@@ -140,9 +131,9 @@ class SmProTable extends React.Component {
     const FormPage = this.props.formPage;
     let { recordLogVisible, recordLogData, moreToolBarVisible, UploadExcelVisible, SearchVisible } = this.state;
     let moreToolBar = [];
-    if (moduleInfo && moduleInfo.status == "ok" && !moduleInfo.noActions.includes(moduleInfo.moduleId + "ExportExcel")) {
+    if (moduleInfo && moduleInfo.status == "ok" && !moduleInfo.noActions.includes(moduleInfo.moduleId + "ExportExcel"))
       moreToolBar.push('ExportExcel');
-    }
+
     const actionColumn =
       moduleInfo && moduleInfo.status == "ok" && moduleInfo.actionCount > 0 ?
         {
