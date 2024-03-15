@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import { connect } from 'umi';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
 // import TableList from './components/TableList'
 import { ClearCache } from '../../../services/common';
 
@@ -39,15 +38,12 @@ class clearCache extends Component {
         // const pageComponent = current;
         return (
             <>
-                <PageHeaderWrapper title={false}>
-                    <Button type="primary" onClick={() => {
+               <Button type="primary" onClick={() => {
                         this.clearCache()
                     }}>清空缓存</Button>
                     <p style={{ marginTop: 10 }}>把所有缓存数据删除</p>
-                </PageHeaderWrapper>
             </>
         )
-
     }
 }
 
