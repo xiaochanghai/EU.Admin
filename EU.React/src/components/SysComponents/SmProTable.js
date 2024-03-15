@@ -1,14 +1,14 @@
 import React from 'react';
 // import ProTable from '@ant-design/pro-table';
-import { Button, Menu, Dropdown, message, Tag, Space, Modal, Descriptions, Skeleton } from 'antd';
-import { DownOutlined, PlusOutlined, ExclamationCircleOutlined, UnorderedListOutlined, RedoOutlined, FileExcelOutlined, CloudUploadOutlined } from '@ant-design/icons';
+import { Button, Menu, Dropdown, message, Tag, Space, Modal, Descriptions, Skeleton, Tooltip } from 'antd';
+import { DownOutlined, PlusOutlined, ExclamationCircleOutlined, UnorderedListOutlined, RedoOutlined, FileExcelOutlined, CloudUploadOutlined, EditOutlined, DeleteOutlined, EyeOutlined, SearchOutlined } from '@ant-design/icons';
 import { connect } from 'umi';
 import { GetModuleLogInfo, ExportExcel } from '../../services/common';
 import defaultSettings from '../../../config/defaultSettings';
 import Utility from '@/utils/utility';
 import UploadExcel from '../../pages/import/UploadExcel';
 import { ProTable } from '@ant-design/pro-components';
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { } from '@ant-design/icons';
 
 const { confirm } = Modal;
 let tableAction;
@@ -20,7 +20,8 @@ class SmProTable extends React.Component {
       recordLogVisible: false,
       recordLogData: null,
       moreToolBarVisible: false,
-      UploadExcelVisible: false
+      UploadExcelVisible: false,
+      SearchVisible: false
     };
   }
   async showDeleteConfirm(action, record) {
@@ -137,7 +138,7 @@ class SmProTable extends React.Component {
     let me = this;
     let { columns, moduleInfo, IsView, request, onReset } = this.props;
     const FormPage = this.props.formPage;
-    let { recordLogVisible, recordLogData, moreToolBarVisible, UploadExcelVisible } = this.state;
+    let { recordLogVisible, recordLogData, moreToolBarVisible, UploadExcelVisible, SearchVisible } = this.state;
     let moreToolBar = [];
     if (moduleInfo && moduleInfo.status == "ok" && !moduleInfo.noActions.includes(moduleInfo.moduleId + "ExportExcel")) {
       moreToolBar.push('ExportExcel');
@@ -306,6 +307,7 @@ class SmProTable extends React.Component {
                   }}
                 ><PlusOutlined /> 新建</Button> : null
             }
+
             {
               moduleInfo && moduleInfo.status == "ok" && !moduleInfo.noActions.includes(moduleInfo.moduleId + "ImportExcel") && !IsView ?
                 <Button
@@ -329,6 +331,12 @@ class SmProTable extends React.Component {
                   }
                 </> : null
             }
+
+            <a onClick={() => {
+              this.setState({ SearchVisible: !SearchVisible })
+            }}><Tooltip placement="top" title='查询'>
+                <SearchOutlined style={{ fontSize: 16 }} />
+              </Tooltip></a>
             {this.props.expendAction ? this.props.expendAction(action, selectedRows) : null}
           </Space>,
           moreToolBar.length > 0 && (
@@ -408,12 +416,13 @@ class SmProTable extends React.Component {
           };
         }}
         options={{
-          search: false,
+          search: true,
           fullScreen: true,
           reload: moreToolBar.length == 0 ? true : false,
           setting: true,
           density: true,
         }}
+        search={SearchVisible}
         rowSelection={{
           fixed: 'left',
           getCheckboxProps: (record) => ({
