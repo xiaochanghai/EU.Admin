@@ -38,9 +38,7 @@ class material extends Component {
 
         return (
             <>
-                <PageHeaderWrapper title={false}>
-                    {current}
-                </PageHeaderWrapper>
+                {current}
             </>
         )
 
