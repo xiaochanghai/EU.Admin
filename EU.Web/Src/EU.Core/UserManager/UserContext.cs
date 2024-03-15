@@ -14,6 +14,9 @@ namespace EU.Core.UserManager
 {
     public class UserContext
     {
+        private static RedisCacheService Redis = new RedisCacheService(4);
+
+
         /// <summary>
         /// 为了尽量减少redis或Memory读取,保证执行效率,将UserContext注入到DI，
         /// 每个UserContext的属性至多读取一次redis或Memory缓存从而提高查询效率
@@ -84,13 +87,13 @@ namespace EU.Core.UserManager
                 _userInfo = new SmUser();
                 return _userInfo;
             }
-            _userInfo = new RedisCacheService(4).Get<SmUser>(userId.ToString());
+            _userInfo = Redis.Get<SmUser>(userId.ToString());
             if (_userInfo == null)
             {
                 string sql = "SELECT A.* FROM SmUsers A WHERE A.IsDeleted='false' AND ID='{0}'";
                 sql = string.Format(sql, userId);
                 _userInfo = DBHelper.Instance.QueryList<SmUser>(sql).SingleOrDefault();
-                new RedisCacheService(4).AddObject(userId.ToString(), _userInfo, new TimeSpan(0, 1, 0, 0, 0));
+                Redis.AddObject(userId.ToString(), _userInfo, new TimeSpan(0, 1, 0, 0, 0));
             }
             return _userInfo ?? new SmUser();
         }
