@@ -13,6 +13,8 @@ namespace EU.Core.Module
     public class ModuleSql
     {
         private string moduleCode;
+        private static RedisCacheService Redis = new RedisCacheService(2);
+
         public ModuleSql(string moduleCode)
         {
             this.moduleCode = moduleCode;
@@ -24,15 +26,15 @@ namespace EU.Core.Module
         /// <returns></returns>
         public SmModuleSqlExtend GetModuleSql()
         {
-            SmModuleSqlExtend module = new RedisCacheService(2).Get<SmModuleSqlExtend>(CacheKeys.SmModuleSql.ToString(), moduleCode);
+            SmModuleSqlExtend module = Redis.Get<SmModuleSqlExtend>(CacheKeys.SmModuleSql.ToString(), moduleCode);
             List<SmModuleSqlExtend> cache = new List<SmModuleSqlExtend>();
             if (module == null)
             {
                 cache = GetModuleSqlList();
-                new RedisCacheService(2).Remove(CacheKeys.SmModuleSql.ToString());
+                Redis.Remove(CacheKeys.SmModuleSql.ToString());
                 foreach (var item in cache)
                 {
-                    new RedisCacheService(2).AddObject(CacheKeys.SmModuleSql.ToString(), item.ModuleCode, item);
+                    Redis.AddObject(CacheKeys.SmModuleSql.ToString(), item.ModuleCode, item);
                 }
                 module = cache.Where(x => x.ModuleCode == moduleCode).FirstOrDefault();
             }
