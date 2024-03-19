@@ -1,7 +1,7 @@
 import { Avatar, Card, Col, List, Skeleton, Row, Statistic } from 'antd';
 import React, { Component } from 'react';
 import { Link, connect } from 'umi';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 import dayjs from 'dayjs';
 import Radar from './components/Radar';
 import EditableLinkGroup from './components/EditableLinkGroup';
@@ -222,7 +222,7 @@ class Workplace extends Component {
                 padding: 0,
               }}
             >
-              <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
+              <EditableLinkGroup onAdd={() => { }} links={links} linkElement={Link} />
             </Card>
             <Card
               style={{

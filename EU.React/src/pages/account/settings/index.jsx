@@ -7,7 +7,7 @@ import BaseView from './components/base';
 // import NotificationView from './components/notification';
 import SecurityView from './components/security';
 import styles from './style.less';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 
 const { Item } = Menu;
 
@@ -154,7 +154,7 @@ class Settings extends Component {
           </div>
         </div>
       </GridContent>
-      //     <>
+     //     <>
       //     <PageHeaderWrapper title={false}>
       //         <Button type="primary" onClick={() => {
       //         }}>清空缓存</Button>

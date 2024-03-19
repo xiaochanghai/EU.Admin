@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'umi';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 import { Card, Col, Row } from 'antd';
 // import { ChartCard, MiniProgress } from '../../../dashboard/analysis/components/Charts';
 import { FormattedMessage } from 'umi';

@@ -3,7 +3,7 @@ import { Button, Divider, Dropdown, Menu, message, Input, Tag, Popconfirm, Tree,
 import { connect } from 'umi';
 import { DownOutlined, PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import ProTable from '@ant-design/pro-table';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 import { SaveAddFormData, SaveEditFormData, query, BatchDelete, Delete, GetStructureTree } from '../service';
 import Index from '../index';
 import FormPage from './FormPage'

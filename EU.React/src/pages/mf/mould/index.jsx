@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'umi';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 import TableList from './components/TableList'
 
 let me;
@@ -27,9 +27,9 @@ class mfmould extends Component {
         const pageComponent = current;
         return (
             <>
-                <PageHeaderWrapper title={false}>
+
                     {pageComponent}
-                </PageHeaderWrapper>
+
             </>
         )
 

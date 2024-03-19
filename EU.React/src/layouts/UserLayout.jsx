@@ -54,7 +54,7 @@ const UserLayout = props => {
           {children}
         </div>
         {/* <DefaultFooter links={[]} copyright='2016-2021 苏州一优信息科技有限公司 技术支持' /> */}
-        <DefaultFooter links={[]} copyright='2023 蚂蚁集团体验技术部出品' />
+        <DefaultFooter links={[]} copyright='2024 苏州一优信息科技有限公司 版权所有' />
       </div>
     </HelmetProvider>
   );

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'umi';
 // eslint-disable-next-line no-unused-vars
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 // eslint-disable-next-line no-unused-vars
 import TableList from './components/TableList'
 
@@ -36,9 +36,9 @@ class porequestiondetailreport extends Component {
         const pageComponent = current;
         return (
             <>
-                <PageHeaderWrapper title={false}>
+
                     {pageComponent}
-                </PageHeaderWrapper>
+
             </>
         )
 

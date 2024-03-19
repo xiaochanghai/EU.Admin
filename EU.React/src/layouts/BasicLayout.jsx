@@ -53,7 +53,7 @@ const loopMenuItem = menus =>
 const defaultFooterDom = (
   <DefaultFooter
     // copyright="2022 苏州一优信息技术有限公司提供技术支持"
-    copyright="2023 蚂蚁集团体验技术部出品"
+    copyright="2024 苏州一优信息技术有限公司版权所有"
     links={[
       // {
       //   key: 'Ant Design Pro',

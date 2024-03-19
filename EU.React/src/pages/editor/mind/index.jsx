@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import GGEditor, { Mind } from 'gg-editor';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 import React from 'react';
 import { formatMessage } from 'umi';
 import EditorMinimap from './components/EditorMinimap';
@@ -35,5 +35,5 @@ export default () => (
       </Row>
       <MindContextMenu />
     </GGEditor>
-  </PageHeaderWrapper>
+
 );

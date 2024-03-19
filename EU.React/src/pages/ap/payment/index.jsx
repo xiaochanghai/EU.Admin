@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'umi';
 // eslint-disable-next-line no-unused-vars
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+
 // eslint-disable-next-line no-unused-vars
 import TableList from './components/TableList'
 // eslint-disable-next-line no-unused-vars
@@ -17,7 +17,7 @@ class appayment extends Component {
             current: <TableList />
         };
     }
-    
+
     componentWillUnmount() {
         const { dispatch } = this.props;
         dispatch({
@@ -37,15 +37,15 @@ class appayment extends Component {
     static changePage(current) {
         me.setState({current})
     }
-    
+
     render() {
         const { current } = this.state;
         const pageComponent = current;
         return (
             <>
-                <PageHeaderWrapper title={false}>
+
                     {pageComponent}
-                </PageHeaderWrapper>
+
             </>
         )
 
