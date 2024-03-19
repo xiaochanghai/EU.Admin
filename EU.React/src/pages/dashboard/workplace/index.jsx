@@ -145,10 +145,11 @@ class Workplace extends Component {
     }
 
     return (
-      <PageHeaderWrapper
-        content={<PageHeaderContent currentUser={currentUser} />}
-        extraContent={<ExtraContent />}
-      >
+      // <PageHeaderWrapper
+      //   content={<PageHeaderContent currentUser={currentUser} />}
+      //   extraContent={<ExtraContent />}
+      // >
+      <>
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>
             <Card
@@ -260,8 +261,10 @@ class Workplace extends Component {
             </Card>
           </Col>
         </Row>
-      </PageHeaderWrapper>
+        </>
+     // </PageHeaderWrapper>
     );
+
   }
 }
 

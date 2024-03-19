@@ -12,31 +12,31 @@ import styles from './index.less';
 
 GGEditor.setTrackable(false);
 export default () => (
-  <PageHeaderWrapper
-    content={formatMessage({
-      id: 'editorandkoni.description',
-      defaultMessage: 'description',
-    })}
-  >
-    <GGEditor className={styles.editor}>
-      <Row className={styles.editorHd}>
-        <Col span={24}>
-          <KoniToolbar />
-        </Col>
-      </Row>
-      <Row className={styles.editorBd}>
-        <Col span={2} className={styles.editorSidebar}>
-          <KoniItemPanel />
-        </Col>
-        <Col span={16} className={styles.editorContent}>
-          <Koni className={styles.koni} />
-        </Col>
-        <Col span={6} className={styles.editorSidebar}>
-          <KoniDetailPanel />
-          <EditorMinimap />
-        </Col>
-      </Row>
-      <KoniContextMenu />
-    </GGEditor>
-
+  // <PageHeaderWrapper
+  //   content={formatMessage({
+  //     id: 'editorandkoni.description',
+  //     defaultMessage: 'description',
+  //   })}
+  // >
+  <GGEditor className={styles.editor}>
+    <Row className={styles.editorHd}>
+      <Col span={24}>
+        <KoniToolbar />
+      </Col>
+    </Row>
+    <Row className={styles.editorBd}>
+      <Col span={2} className={styles.editorSidebar}>
+        <KoniItemPanel />
+      </Col>
+      <Col span={16} className={styles.editorContent}>
+        <Koni className={styles.koni} />
+      </Col>
+      <Col span={6} className={styles.editorSidebar}>
+        <KoniDetailPanel />
+        <EditorMinimap />
+      </Col>
+    </Row>
+    <KoniContextMenu />
+  </GGEditor>
+  // </PageHeaderWrapper>
 );

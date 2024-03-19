@@ -4,7 +4,7 @@ import { Card, Typography, Alert } from 'antd';
 
 
 export default () => (
-  <PageHeaderWrapper content=" 这个页面只有 admin 权限才能查看">
+  <>
     <Card>
       <Alert
         message="umi ui 现已发布，欢迎使用 npm run ui 启动体验。"
@@ -37,5 +37,5 @@ export default () => (
       </a>
       。
     </p>
-
+  </>
 );
